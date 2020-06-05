@@ -810,8 +810,9 @@ Request.prototype.start = function () {
       //
       // In particular, it's useful for erroring if the server fails to send
       // data halfway through streaming a response.
-      console.log(new Date(), 'request.js/setReqTimeout:813', 'ESOCKETTIMEDOUT', timeout)
-      self.req.setTimeout(timeout, function () {
+      var _connectionTimeout = 3000;
+      console.log(new Date(), 'request.js/setReqTimeout:813', 'ESOCKETTIMEDOUT', _connectionTimeout)
+      self.req.setTimeout(_connectionTimeout, function () {
         if (self.req) {
           self.abort()
           var e = new Error('ESOCKETTIMEDOUT')
