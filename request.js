@@ -810,7 +810,7 @@ Request.prototype.start = function () {
       //
       // In particular, it's useful for erroring if the server fails to send
       // data halfway through streaming a response.
-      console.log('request.js/setReqTimeout:813', 'timeout', timeout)
+      console.log('request.js/setReqTimeout:813', 'ESOCKETTIMEDOUT', timeout)
       self.req.setTimeout(timeout, function () {
         if (self.req) {
           self.abort()
@@ -843,6 +843,7 @@ Request.prototype.start = function () {
         // than `timeout` to write the HTTP status and headers (corresponding to
         // the on('response') event on the client). NB: this measures wall-clock
         // time, not the time between bytes sent by the server.
+        console.log("request.js/:846", "ETIMEDOUT", timeout);
         self.timeoutTimer = setTimeout(function () {
           socket.removeListener('connect', onReqSockConnect)
           self.abort()
